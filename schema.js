@@ -1,6 +1,6 @@
 const { buildSchema } = require("graphql");
 
-const schema = buildSchema(`
+const mahasiswa = buildSchema(`
   type Mahasiswa {
     nim: ID!
     nama: String!
@@ -9,6 +9,12 @@ const schema = buildSchema(`
     id_departemen: String
   }
 
+  type Query {
+    mahasiswa: [Mahasiswa]
+  }
+`);
+
+const departemen = buildSchema(`
   type Departemen {
     id: ID!
     kode_departemen: String!
@@ -16,6 +22,12 @@ const schema = buildSchema(`
     fakultas: String!
   }
 
+  type Query {
+    departemen: [Departemen]
+  }
+`);
+
+const mataKuliah = buildSchema(`
   type MataKuliah {
     id: ID!
     kode_mata_kuliah: String!
@@ -24,6 +36,12 @@ const schema = buildSchema(`
     id_departemen: String!
   }
 
+  type Query {
+    mataKuliah: [MataKuliah]
+  }
+`);
+
+const khs = buildSchema(`
   type KHS {
     id: ID!
     nim: String!
@@ -33,6 +51,12 @@ const schema = buildSchema(`
     sks_total: Int!
   }
 
+  type Query {
+    khs: [KHS]
+  }
+`);
+
+const khsDetail = buildSchema(`
   type KHSDetail {
     id: ID!
     id_khs: String!
@@ -41,12 +65,14 @@ const schema = buildSchema(`
   }
 
   type Query {
-    mahasiswa: [Mahasiswa]
-    departemen: [Departemen]
-    mataKuliah: [MataKuliah]
-    khs: [KHS]
     khsDetail: [KHSDetail]
   }
 `);
 
-module.exports = schema;
+module.exports = {
+  mahasiswa,
+  departemen,
+  mataKuliah,
+  khs,
+  khsDetail,
+};
